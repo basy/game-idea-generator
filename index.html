@@ -17,27 +17,34 @@
   <button onclick="generate()">生成する</button>
 
   <script>
-    const genres = ["RPG", "アクション", "シューティング", "パズル", "シミュレーション", "スポーツ", "レース", "アドベンチャー", "リズム", "ストラテジー"];
-    const worlds = ["ファンタジー", "サイバーパンク", "ポストアポカリプス", "和風／江戸時代", "宇宙", "海中", "近未来", "中世ヨーロッパ", "スチームパンク", "現代社会"];
-    const themes = ["農業", "料理", "ペット育成", "恋愛", "謎解き", "貿易", "探検", "ロボット", "戦争", "音楽"];
+    const genres = [
+      "RPG", "アクション", "シューティング", "パズル", "シミュレーション",
+      "スポーツ", "レース", "アドベンチャー", "リズム", "ストラテジー"
+    ];
+
+    const mechanics = [
+      "ターン制", "リアルタイム", "デッキ構築", "スコアアタック",
+      "パーマデス", "クラフト", "ステルス", "探索",
+      "タワーディフェンス", "物理演算", "陣取り", "ローグライク",
+      "時間制限", "パズル的操作", "強化・育成"
+    ];
+
+    const worlds = [
+      "ファンタジー", "サイバーパンク", "ポストアポカリプス", "和風／江戸時代",
+      "宇宙", "海中", "近未来", "中世ヨーロッパ", "スチームパンク", "現代社会"
+    ];
 
     function getRandomItem(array) {
       return array[Math.floor(Math.random() * array.length)];
     }
 
-    function getRandomPair() {
-      // 3つのリストの中からランダムに2つ選ぶ
-      const lists = [genres, worlds, themes];
-      const [list1, list2] = lists.sort(() => 0.5 - Math.random()).slice(0, 2);
-      const item1 = getRandomItem(list1);
-      const item2 = getRandomItem(list2);
-      return `${item1} × ${item2}`;
-    }
-
     function generate() {
       let output = "";
       for (let i = 0; i < 3; i++) {
-        output += getRandomPair() + "<br>";
+        const genre = getRandomItem(genres);
+        const mechanic = getRandomItem(mechanics);
+        const world = getRandomItem(worlds);
+        output += `${genre} × ${mechanic} × ${world}<br>`;
       }
       document.getElementById("result").innerHTML = output;
     }
