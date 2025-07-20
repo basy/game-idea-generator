@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ゲーム企画掛け算ジェネレーター</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 50px; }
+    h1 { font-size: 24px; }
+    #result { font-size: 20px; margin: 20px 0; }
+    button { font-size: 16px; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h1>ゲーム企画掛け算ジェネレーター</h1>
+  <p id="result">ここに結果が表示されます</p>
+  <button onclick="generate()">生成する</button>
+
+  <script>
+    const genres = ["RPG", "FPS", "パズル", "シミュレーション", "アドベンチャー"];
+    const themes = ["サイバーパンク", "中世ファンタジー", "ホラー", "宇宙", "ポストアポカリプス"];
+
+    function generate() {
+      const g = genres[Math.floor(Math.random() * genres.length)];
+      const t = themes[Math.floor(Math.random() * themes.length)];
+      document.getElementById("result").innerText = `${g} × ${t}`;
+    }
+  </script>
+</body>
+</html>
