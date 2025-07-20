@@ -5,25 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ゲーム企画掛け算ジェネレーター</title>
   <style>
-    body { font-family: sans-serif; text-align: center; padding: 50px; }
+    body { font-family: sans-serif; text-align: center; padding: 40px; }
     h1 { font-size: 24px; }
-    #result { font-size: 20px; margin: 20px 0; }
+    #result { font-size: 18px; margin: 20px 0; }
     button { font-size: 16px; padding: 10px 20px; }
   </style>
 </head>
 <body>
   <h1>ゲーム企画掛け算ジェネレーター</h1>
-  <p id="result">ここに結果が表示されます</p>
+  <div id="result">ここに結果が表示されます</div>
   <button onclick="generate()">生成する</button>
 
   <script>
-    const genres = ["RPG", "FPS", "パズル", "シミュレーション", "アドベンチャー"];
-    const themes = ["サイバーパンク", "中世ファンタジー", "ホラー", "宇宙", "ポストアポカリプス"];
+    const genres = ["RPG", "アクション", "シューティング", "パズル", "シミュレーション", "スポーツ", "レース", "アドベンチャー", "リズム", "ストラテジー"];
+    const worlds = ["ファンタジー", "サイバーパンク", "ポストアポカリプス", "和風／江戸時代", "宇宙", "海中", "近未来", "中世ヨーロッパ", "スチームパンク", "現代社会"];
+    const themes = ["農業", "料理", "ペット育成", "恋愛", "謎解き", "貿易", "探検", "ロボット", "戦争", "音楽"];
+
+    function getRandomItem(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    function getRandomPair() {
+      // 3つのリストの中からランダムに2つ選ぶ
+      const lists = [genres, worlds, themes];
+      const [list1, list2] = lists.sort(() => 0.5 - Math.random()).slice(0, 2);
+      const item1 = getRandomItem(list1);
+      const item2 = getRandomItem(list2);
+      return `${item1} × ${item2}`;
+    }
 
     function generate() {
-      const g = genres[Math.floor(Math.random() * genres.length)];
-      const t = themes[Math.floor(Math.random() * themes.length)];
-      document.getElementById("result").innerText = `${g} × ${t}`;
+      let output = "";
+      for (let i = 0; i < 3; i++) {
+        output += getRandomPair() + "<br>";
+      }
+      document.getElementById("result").innerHTML = output;
     }
   </script>
 </body>
